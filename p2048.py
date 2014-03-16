@@ -25,3 +25,11 @@ def right_pad(input_list, size=4):
     extension = [0,] * (size - len(result))
     result.extend(extension)
     return result
+
+
+def rotate(board):
+    """
+    Returns the given board rotated by 90 degrees clockwise.
+    """
+    reversed_board = board[::-1]
+    return map(list, zip(*reversed_board))

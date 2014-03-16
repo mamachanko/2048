@@ -1,7 +1,6 @@
 from itertools import permutations
 
-import p2048
-from p2048 import merge, right_pad, move
+from p2048 import merge, right_pad, move, rotate
 
 
 def test_single_digit_move():
@@ -56,3 +55,8 @@ def test_right_pad_list_to_defined_length():
 def test_idempotent_right_pad():
     assert [2, 4] == right_pad([2, 4], size=2)
     assert [2, 4, 8] == right_pad([2, 4, 8], size=2)
+
+
+def test_rotates_board_clockwise():
+    board = [[2,]*4, [4,]*8, [8,]*4, [16,]*4]
+    assert [[16, 8, 4, 2]]*4 == rotate(board)

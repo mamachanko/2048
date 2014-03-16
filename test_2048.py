@@ -1,6 +1,8 @@
 from itertools import permutations
 from copy import deepcopy
 
+from p2048 import Board
+
 
 from p2048 import merge, right_pad, move, rotate
 
@@ -70,3 +72,36 @@ def test_four_rotations_equal_no_rotation():
     for x in range(4):
         _board = rotate(_board)
     assert board == _board
+
+
+def test_Board_init():
+    board = Board()
+    assert 4 == len(board.board)
+    for row in board.board:
+        4 == len(board.board)
+    assert 2 == board.serialize().count(2)
+    assert 14 == board.serialize().count(0)
+
+
+def test_board_serialization():
+    board = Board()
+    serialized_board = board.serialize()
+    assert 16 == len(serialized_board)
+    split_indices = map(lambda x: 4*x, range(4))
+    deserialized = [serialized_board[index:index+4] for index in split_indices]
+    assert deserialized == board.board
+
+
+def test_board_rotate():
+    board = Board()
+    initial_state = deepcopy(board.board)
+    board.rotate()
+    assert rotate(initial_state) == board.board
+
+
+def test_move_left():
+    board = Board()
+    initial_state = deepcopy(board.board)
+    board.move_left()
+    for initial_row, moved_row in zip(initial_state, board.board):
+        assert move(initial_row) == moved_row

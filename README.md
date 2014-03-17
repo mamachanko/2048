@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/mamachanko/2048.png?branch=master)](https://travis-ci.org/mamachanko/2048)
 2048
 ====
 

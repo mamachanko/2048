@@ -62,7 +62,9 @@ def move(row):
 
 def merge(row):
     result = []
-    digit_stack = list(reversed(row))
+    row = row[:]
+    row.reverse()
+    digit_stack = row
     while digit_stack:
         if len(digit_stack) == 1:
             result.append(digit_stack.pop())

@@ -45,6 +45,12 @@ class Board(object):
         """
         self.board = map(move, self.board)
 
+    def move_down(self):
+        """
+        Performs the 'down' move on the board
+        """
+        self.board = rotate(rotate(map(move, rotate(self.board))))
+
     def __repr__(self):
         return '\n'.join(map(lambda row: '{}'.format(row), self.board))
 

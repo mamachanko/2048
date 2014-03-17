@@ -103,5 +103,12 @@ def test_move_left():
     board = Board()
     initial_state = deepcopy(board.board)
     board.move_left()
-    for initial_row, moved_row in zip(initial_state, board.board):
-        assert move(initial_row) == moved_row
+    assert map(move, initial_state) == board.board
+
+
+def test_move_down():
+    board = Board()
+    initial_state = deepcopy(board.board)
+    board.move_down()
+    assert rotate(rotate(map(move, rotate(initial_state)))) == board.board
+

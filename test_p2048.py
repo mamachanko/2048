@@ -99,18 +99,18 @@ def default_board_state():
     """
     Returns the default initial board state for testing
     """
-    return [[2, 0, 0, 0],
+    return [[2, 0, 2, 0],
             [0, 0, 0, 0],
-            [0, 0, 2, 0],
+            [4, 0, 8, 0],
             [0, 0, 0, 0]]
 
 
 def test_board_rotate(default_board_state):
     board = Board(state=default_board_state)
     board.rotate()
-    rotated_board = [[0, 0, 0, 2],
+    rotated_board = [[0, 4, 0, 2],
                      [0, 0, 0, 0],
-                     [0, 2, 0, 0],
+                     [0, 8, 0, 2],
                      [0, 0, 0, 0]]
     assert rotated_board == board.state
 
@@ -118,9 +118,9 @@ def test_board_rotate(default_board_state):
 def test_move_left(default_board_state):
     board = Board(state=default_board_state)
     board.move_left()
-    moved_left = [[2, 0, 0, 0],
+    moved_left = [[4, 0, 0, 0],
                   [0, 0, 0, 0],
-                  [2, 0, 0, 0],
+                  [4, 8, 0, 0],
                   [0, 0, 0, 0]]
     assert moved_left == board.state
 
@@ -128,9 +128,9 @@ def test_move_left(default_board_state):
 def test_move_right(default_board_state):
     board = Board(state=default_board_state)
     board.move_right()
-    moved_right = [[0, 0, 0, 2],
+    moved_right = [[0, 0, 0, 4],
                    [0, 0, 0, 0],
-                   [0, 0, 0, 2],
+                   [0, 0, 4, 8],
                    [0, 0, 0, 0]]
     assert moved_right == board.state
 
@@ -140,8 +140,8 @@ def test_move_down(default_board_state):
     board.move_down()
     moved_down = [[0, 0, 0, 0],
                   [0, 0, 0, 0],
-                  [0, 0, 0, 0],
-                  [2, 0, 2, 0]]
+                  [2, 0, 2, 0],
+                  [4, 0, 8, 0]]
     assert moved_down == board.state
 
 
@@ -149,7 +149,7 @@ def test_move_up(default_board_state):
     board = Board(state=default_board_state)
     board.move_up()
     moved_up = [[2, 0, 2, 0],
-                [0, 0, 0, 0],
+                [4, 0, 8, 0],
                 [0, 0, 0, 0],
                 [0, 0, 0, 0]]
     assert moved_up == board.state

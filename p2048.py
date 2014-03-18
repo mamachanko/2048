@@ -6,8 +6,11 @@ class Board(object):
     Represents a 4x4 game board
     """
 
-    def __init__(self):
-        self.board = self._get_random_init_state()
+    def __init__(self, state=None):
+        if state is None:
+            self.state = self._get_random_init_state()
+        else:
+            self.state = state
 
     def _get_random_init_state(self):
         """
@@ -24,7 +27,7 @@ class Board(object):
         Returns the serialized state of the board being the rows joined
         into one flat list
         """
-        return sum(self.board, [])
+        return sum(self.state, [])
 
     def deserialize(self, flat_list):
         """
@@ -37,22 +40,34 @@ class Board(object):
         """
         Rotates the board by 90 deegrees clockwise
         """
-        self.board = rotate(self.board)
+        self.state = rotate(self.state)
 
     def move_left(self):
         """
         Performs the 'left' move on the board
         """
-        self.board = map(move, self.board)
+        self.state = map(move, self.state)
+
+    def move_right(self):
+        """
+        Performs the 'right' move on the board
+        """
+        self.state = rotate(rotate(map(move, rotate(rotate(self.state)))))
 
     def move_down(self):
         """
         Performs the 'down' move on the board
         """
-        self.board = rotate(rotate(map(move, rotate(self.board))))
+        self.state = rotate(rotate(rotate(map(move, rotate(self.state)))))
+
+    def move_up(self):
+        """
+        Performs the 'up' move on the board
+        """
+        self.state = rotate(map(move, rotate(rotate(rotate(self.state)))))
 
     def __repr__(self):
-        return '\n'.join(map(lambda row: '{}'.format(row), self.board))
+        return '\n'.join(map(lambda row: '{}'.format(row), self.state))
 
 
 def move(row):

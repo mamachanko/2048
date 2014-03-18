@@ -1,10 +1,12 @@
 from itertools import permutations
 from copy import deepcopy
 
+import pytest
+
 from p2048 import Board
-
-
 from p2048 import merge, right_pad, move, rotate
+
+
 
 
 def test_single_digit_move():
@@ -76,9 +78,9 @@ def test_four_rotations_equal_no_rotation():
 
 def test_Board_init():
     board = Board()
-    assert 4 == len(board.board)
-    for row in board.board:
-        4 == len(board.board)
+    assert 4 == len(board.state)
+    for row in board.state:
+        4 == len(board.state)
     assert 2 == board.serialize().count(2)
     assert 14 == board.serialize().count(0)
 
@@ -89,26 +91,65 @@ def test_board_serialization():
     assert 16 == len(serialized_board)
     split_indices = map(lambda x: 4*x, range(4))
     deserialized = [serialized_board[index:index+4] for index in split_indices]
-    assert deserialized == board.board
+    assert deserialized == board.state
 
 
-def test_board_rotate():
-    board = Board()
-    initial_state = deepcopy(board.board)
+@pytest.fixture(scope='function')
+def default_board_state():
+    """
+    Returns the default initial board state for testing
+    """
+    return [[2, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 2, 0],
+            [0, 0, 0, 0]]
+
+
+def test_board_rotate(default_board_state):
+    board = Board(state=default_board_state)
     board.rotate()
-    assert rotate(initial_state) == board.board
+    rotated_board = [[0, 0, 0, 2],
+                     [0, 0, 0, 0],
+                     [0, 2, 0, 0],
+                     [0, 0, 0, 0]]
+    assert rotated_board == board.state
 
 
-def test_move_left():
-    board = Board()
-    initial_state = deepcopy(board.board)
+def test_move_left(default_board_state):
+    board = Board(state=default_board_state)
     board.move_left()
-    assert map(move, initial_state) == board.board
+    moved_left = [[2, 0, 0, 0],
+                  [0, 0, 0, 0],
+                  [2, 0, 0, 0],
+                  [0, 0, 0, 0]]
+    assert moved_left == board.state
 
 
-def test_move_down():
-    board = Board()
-    initial_state = deepcopy(board.board)
+def test_move_right(default_board_state):
+    board = Board(state=default_board_state)
+    board.move_right()
+    moved_right = [[0, 0, 0, 2],
+                   [0, 0, 0, 0],
+                   [0, 0, 0, 2],
+                   [0, 0, 0, 0]]
+    assert moved_right == board.state
+
+
+def test_move_down(default_board_state):
+    board = Board(state=default_board_state)
     board.move_down()
-    assert rotate(rotate(map(move, rotate(initial_state)))) == board.board
+    moved_down = [[0, 0, 0, 0],
+                  [0, 0, 0, 0],
+                  [0, 0, 0, 0],
+                  [2, 0, 2, 0]]
+    assert moved_down == board.state
 
+
+def test_move_up(default_board_state):
+    board = Board(state=default_board_state)
+    board.move_up()
+    moved_up = [[2, 0, 2, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0]]
+    assert moved_up == board.state

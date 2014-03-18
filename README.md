@@ -24,7 +24,6 @@ This is a Python game engine implementation of the rather popular game [2048](ht
 todos
 -----
  * write README
- * add all moves
  * add new elements after each move
  * detect idempotent move
  * detect `game over`

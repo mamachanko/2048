@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/mamachanko/2048.png?branch=master)](https://travis-ci.org/mamachanko/2048)
+[![Coverage Status](https://coveralls.io/repos/mamachanko/2048/badge.png)](https://coveralls.io/r/mamachanko/2048)
 2048
 ====
 

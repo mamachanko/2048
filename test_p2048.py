@@ -7,8 +7,6 @@ from p2048 import Board
 from p2048 import merge, right_pad, move, rotate
 
 
-
-
 def test_single_digit_move():
     assert [2, 0, 0, 0] == move([0, 0, 2, 0])
 

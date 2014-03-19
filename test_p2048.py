@@ -1,5 +1,6 @@
-from itertools import permutations
 from copy import deepcopy
+from itertools import permutations
+from functools import partial
 
 import pytest
 
@@ -151,3 +152,15 @@ def test_move_up(default_board_state):
                 [0, 0, 0, 0],
                 [0, 0, 0, 0]]
     assert moved_up == board.state
+
+
+def test_add_random():
+    board = Board()
+    initial_state = board.serialize()
+    board.add_random()
+    assert initial_state != board.serialize()
+    get_conflicts = partial(filter, lambda x: x[0] != x[1])
+    conflicts = list(get_conflicts(zip(initial_state, board.serialize())))
+    assert 1 == len(conflicts)
+    assert 0 == conflicts[0][0]
+    assert conflicts[0][1] in (2, 4)

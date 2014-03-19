@@ -79,6 +79,15 @@ class Board(object):
     def __repr__(self):
         return '\n'.join(map(lambda row: '{}'.format(row), self.state))
 
+    def add_random(self):
+        serialized = self.serialize()
+        indexed = zip(range(len(serialized)), serialized)
+        zeroes = filter(lambda x: not bool(x[1]), indexed)
+        index, _ = random.choice(list(zeroes))
+        digit = random.choice((2, 4))
+        serialized[index] = digit
+        self.state = self.deserialize(serialized)
+
 
 def move(row):
     without_zeroes = filter(bool, row)

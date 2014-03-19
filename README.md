@@ -29,3 +29,5 @@ todos
  * detect idempotent move
  * detect `game over`
  * change board dimension from 4 to n
+ * tag version
+ * add to PyPi with version and downloads badge(http://codeinthehole.com/writing/pypi-readme-badges/)

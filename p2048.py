@@ -66,6 +66,14 @@ class Board(object):
         """
         self.state = rotate(map(move, rotate(rotate(rotate(self.state)))))
 
+    def _perform_commands(commands):
+        """
+        """
+        state = list(self.state)
+        for command in commands:
+            state = command(state)
+        self.state = list(self.state)
+
     def __repr__(self):
         return '\n'.join(map(lambda row: '{}'.format(row), self.state))
 

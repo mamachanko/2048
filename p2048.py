@@ -1,3 +1,4 @@
+from functools import partial
 import random
 
 
@@ -46,33 +47,34 @@ class Board(object):
         """
         Performs the 'left' move on the board
         """
-        self.state = map(move, self.state)
+        self.apply([partial(map, move)])
 
     def move_right(self):
         """
         Performs the 'right' move on the board
         """
-        self.state = rotate(rotate(map(move, rotate(rotate(self.state)))))
+        self.apply([rotate, rotate, partial(map, move), rotate, rotate])
 
     def move_down(self):
         """
         Performs the 'down' move on the board
         """
-        self.state = rotate(rotate(rotate(map(move, rotate(self.state)))))
+        self.apply([rotate, partial(map, move), rotate, rotate, rotate])
 
     def move_up(self):
         """
         Performs the 'up' move on the board
         """
-        self.state = rotate(map(move, rotate(rotate(rotate(self.state)))))
+        self.apply([rotate, rotate, rotate, partial(map, move), rotate])
 
-    def _perform_commands(commands):
+    def apply(self, functions):
         """
+        Applies the list of functions to the board's state in the given order
         """
         state = list(self.state)
-        for command in commands:
-            state = command(state)
-        self.state = list(self.state)
+        for function in functions:
+            state = function(state)
+        self.state = list(state)
 
     def __repr__(self):
         return '\n'.join(map(lambda row: '{}'.format(row), self.state))
@@ -115,4 +117,5 @@ def rotate(board):
     """
     board = list(board)  # copy the board
     board.reverse()
-    return map(list, zip(*board))
+    rotated_board = map(list, zip(*board))
+    return list(rotated_board)

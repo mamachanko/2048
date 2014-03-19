@@ -77,7 +77,7 @@ def move(row):
 
 def merge(row):
     result = []
-    row = row[:]
+    row = list(row)  # copy the row
     row.reverse()
     digit_stack = row
     while digit_stack:
@@ -105,5 +105,6 @@ def rotate(board):
     """
     Returns the given board rotated by 90 degrees clockwise.
     """
-    reversed_board = board[::-1]
-    return map(list, zip(*reversed_board))
+    board = list(board)  # copy the board
+    board.reverse()
+    return map(list, zip(*board))

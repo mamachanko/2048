@@ -16,9 +16,21 @@ This is a Python game engine implementation of the rather popular game [2048](ht
 >>> board.move_left()
 >>> print board
 [0, 0, 0, 0]
-[0, 0, 0, 0]
+[0, 0, 0, 4]
 [4, 0, 0, 0]
 [0, 0, 0, 0]
+>>> board.move_right()
+>>> print board
+[0, 0, 0, 0]
+[0, 2, 0, 4]
+[0, 0, 0, 4]
+[0, 0, 0, 0]
+>>> board.move_down()
+>>> print board
+[0, 0, 0, 0]
+[2, 0, 0, 0]
+[0, 0, 0, 0]
+[0, 2, 0, 8]
 ```
 
 

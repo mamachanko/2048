@@ -164,3 +164,17 @@ def test_add_random():
     assert 1 == len(conflicts)
     assert 0 == conflicts[0][0]
     assert conflicts[0][1] in (2, 4)
+
+
+def test_initial_move_count():
+    board = Board()
+    assert board.move_count == 0
+
+
+def test_move_counting():
+    board = Board()
+    board.move_left()
+    board.move_right()
+    board.move_up()
+    board.move_down()
+    assert 4 == board.move_count

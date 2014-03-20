@@ -2,6 +2,14 @@ from functools import partial
 import random
 
 
+def board_move(move_func):
+    def wrapper(*args, **kwargs):
+        board = args[0]
+        board.move_count += 1
+        return move_func(*args, **kwargs)
+    return wrapper
+
+
 class Board(object):
     """
     Represents a 4x4 game board
@@ -12,6 +20,7 @@ class Board(object):
             self.state = self._get_random_init_state()
         else:
             self.state = state
+        self.move_count = 0
 
     def _get_random_init_state(self):
         """
@@ -43,24 +52,28 @@ class Board(object):
         """
         self.state = rotate(self.state)
 
+    @board_move
     def move_left(self):
         """
         Performs the 'left' move on the board
         """
         self.apply([partial(map, move)])
 
+    @board_move
     def move_right(self):
         """
         Performs the 'right' move on the board
         """
         self.apply([rotate, rotate, partial(map, move), rotate, rotate])
 
+    @board_move
     def move_down(self):
         """
         Performs the 'down' move on the board
         """
         self.apply([rotate, partial(map, move), rotate, rotate, rotate])
 
+    @board_move
     def move_up(self):
         """
         Performs the 'up' move on the board
@@ -87,6 +100,8 @@ class Board(object):
         digit = random.choice((2, 4))
         serialized[index] = digit
         self.state = self.deserialize(serialized)
+
+
 
 
 def move(row):

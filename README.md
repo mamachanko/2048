@@ -25,9 +25,11 @@ This is a Python game engine implementation of the rather popular game [2048](ht
 todos
 -----
  * write README
- * add new elements after each move
+ * add `move` decorator for:
+   * [ ] adding new elements after each moves
+   * [x] counting moves
+   * [ ] raising GameOverException once no more move is possible
  * detect idempotent move
- * detect `game over`
  * change board dimension from 4 to n
  * tag version
  * add to PyPi with version and downloads badge(http://codeinthehole.com/writing/pypi-readme-badges/)

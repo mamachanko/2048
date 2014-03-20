@@ -77,7 +77,7 @@ class Board(object):
         self.state = list(state)
 
     def __repr__(self):
-        return '\n'.join(map(lambda row: '{}'.format(row), self.state))
+        return '<Board {}>'.format(self.state)
 
     def add_random(self):
         serialized = self.serialize()

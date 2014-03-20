@@ -26,7 +26,7 @@ todos
 -----
  * write README
  * add `move` decorator for:
-   * [ ] adding new elements after each moves
+   * [x] adding new elements after each moves
    * [x] counting moves
    * [ ] raising GameOverException once no more move is possible
  * detect idempotent move

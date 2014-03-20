@@ -6,7 +6,9 @@ def board_move(move_func):
     def wrapper(*args, **kwargs):
         board = args[0]
         board.move_count += 1
-        return move_func(*args, **kwargs)
+        return_value = move_func(*args, **kwargs)
+        board.add_random()
+        return return_value
     return wrapper
 
 
@@ -55,29 +57,45 @@ class Board(object):
     @board_move
     def move_left(self):
         """
-        Performs the 'left' move on the board
+        Performs the 'left' move on the board, increments the move counter and
+        adds a new random element
         """
+        self._move_left()
+
+    def _move_left(self):
         self.apply([partial(map, move)])
 
     @board_move
     def move_right(self):
         """
-        Performs the 'right' move on the board
+        Performs the 'right' move on the board, increments the move counter and
+        adds a new random element
         """
+        self._move_right()
+
+    def _move_right(self):
         self.apply([rotate, rotate, partial(map, move), rotate, rotate])
 
     @board_move
     def move_down(self):
         """
-        Performs the 'down' move on the board
+        Performs the 'down' move on the board, increments the move counter and
+        adds a new random element
         """
+        self._move_down()
+
+    def _move_down(self):
         self.apply([rotate, partial(map, move), rotate, rotate, rotate])
 
     @board_move
     def move_up(self):
         """
-        Performs the 'up' move on the board
+        Performs the 'up' move on the board, increments the move counter and
+        adds a new random element
         """
+        self._move_up()
+
+    def _move_up(self):
         self.apply([rotate, rotate, rotate, partial(map, move), rotate])
 
     def apply(self, functions):

@@ -116,7 +116,7 @@ def test_board_rotate(default_board_state):
 
 def test_move_left(default_board_state):
     board = Board(state=default_board_state)
-    board.move_left()
+    board._move_left()
     moved_left = [[4, 0, 0, 0],
                   [0, 0, 0, 0],
                   [4, 8, 0, 0],
@@ -126,7 +126,7 @@ def test_move_left(default_board_state):
 
 def test_move_right(default_board_state):
     board = Board(state=default_board_state)
-    board.move_right()
+    board._move_right()
     moved_right = [[0, 0, 0, 4],
                    [0, 0, 0, 0],
                    [0, 0, 4, 8],
@@ -136,7 +136,7 @@ def test_move_right(default_board_state):
 
 def test_move_down(default_board_state):
     board = Board(state=default_board_state)
-    board.move_down()
+    board._move_down()
     moved_down = [[0, 0, 0, 0],
                   [0, 0, 0, 0],
                   [2, 0, 2, 0],
@@ -146,7 +146,7 @@ def test_move_down(default_board_state):
 
 def test_move_up(default_board_state):
     board = Board(state=default_board_state)
-    board.move_up()
+    board._move_up()
     moved_up = [[2, 0, 2, 0],
                 [4, 0, 8, 0],
                 [0, 0, 0, 0],
@@ -159,8 +159,20 @@ def test_add_random():
     initial_state = board.serialize()
     board.add_random()
     assert initial_state != board.serialize()
-    get_conflicts = partial(filter, lambda x: x[0] != x[1])
-    conflicts = list(get_conflicts(zip(initial_state, board.serialize())))
+    conflicts = get_positional_diff(initial_state, board.serialize())
+    assert 1 == len(conflicts)
+    assert 0 == conflicts[0][0]
+    assert conflicts[0][1] in (2, 4)
+
+
+def test_move_adds_random_digit():
+    board = Board()
+    copied_board = Board(state=list(board.state))
+    board.move_left()
+    copied_board._move_left()
+    assert copied_board.state != board.state
+    conflicts = get_positional_diff(copied_board.serialize(),
+                                    board.serialize())
     assert 1 == len(conflicts)
     assert 0 == conflicts[0][0]
     assert conflicts[0][1] in (2, 4)
@@ -178,3 +190,9 @@ def test_move_counting():
     board.move_up()
     board.move_down()
     assert 4 == board.move_count
+
+
+def get_positional_diff(list_a, list_b):
+    get_conflicts = partial(filter, lambda x: x[0] != x[1])
+    conflicts = list(get_conflicts(zip(list_a, list_b)))
+    return conflicts

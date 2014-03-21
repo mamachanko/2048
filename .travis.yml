@@ -6,13 +6,12 @@ python:
   - "2.6"
 
 install:
-  - "pip install pytest"
   - "pip install pytest-cov"
   - "pip install coverage"
   - "pip install coveralls"
 
 script:
-  - "py.test --tb=native --cov ."
+  - "python setup.py test"
 
 after_success:
   - "coveralls"

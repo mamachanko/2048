@@ -2,11 +2,18 @@ from functools import partial
 import random
 
 
+class GameOverException(Exception):
+    pass
+
+
 def board_move(move_func):
     def wrapper(*args, **kwargs):
         board = args[0]
         board.move_count += 1
+        board_state_before = board.serialize()
         return_value = move_func(*args, **kwargs)
+        if board.serialize() == board_state_before:
+            raise GameOverException()
         board.add_random()
         return return_value
     return wrapper

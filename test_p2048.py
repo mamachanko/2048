@@ -5,7 +5,7 @@ from functools import partial
 import pytest
 
 from p2048 import Board
-from p2048 import merge, right_pad, move, rotate
+from p2048 import merge, right_pad, move, rotate, GameOverException
 
 
 def test_single_digit_move():
@@ -190,6 +190,20 @@ def test_move_counting():
     board.move_up()
     board.move_down()
     assert 4 == board.move_count
+
+
+def test_raises_gameover_exception():
+    board = Board([[2, 4, 2, 4],
+                   [4, 2, 4, 2],
+                   [2, 4, 2, 4],
+                   [4, 2, 4, 2]])
+    try:
+        board.move_left()
+    except GameOverException:
+        assert True
+    else:
+        assert False, 'GameOverException not raised'
+
 
 
 def get_positional_diff(list_a, list_b):

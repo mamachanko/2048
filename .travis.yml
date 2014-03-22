@@ -8,9 +8,13 @@ python:
 install:
   - "pip install coverage"
   - "pip install coveralls"
+  - "pip install flake8"
 
 script:
   - "coverage run setup.py test"
+
+after_script:
+  - "flake8 ."
 
 after_success:
   - "coveralls"

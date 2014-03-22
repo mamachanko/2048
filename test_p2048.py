@@ -63,12 +63,12 @@ def test_idempotent_right_pad():
 
 
 def test_rotates_board_clockwise():
-    board = [[2,]*4, [4,]*8, [8,]*4, [16,]*4]
+    board = [[2, ]*4, [4, ]*8, [8, ]*4, [16, ]*4]
     assert [[16, 8, 4, 2]]*4 == rotate(board)
 
 
 def test_four_rotations_equal_no_rotation():
-    board = [[2,]*4, [4,]*4, [8,]*4, [16,]*4]
+    board = [[2, ]*4, [4, ]*4, [8, ]*4, [16, ]*4]
     _board = deepcopy(board)
     for x in range(4):
         _board = rotate(_board)

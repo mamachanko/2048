@@ -154,7 +154,7 @@ def merge(row):
 
 def right_pad(input_list, size=4):
     result = input_list[:]
-    extension = [0,] * (size - len(result))
+    extension = [0, ] * (size - len(result))
     result.extend(extension)
     return result
 

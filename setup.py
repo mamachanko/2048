@@ -1,5 +1,4 @@
 from distutils.core import setup, Command
-import sys
 import subprocess
 
 
@@ -27,12 +26,12 @@ setup(name='python-2048a',
       tests_require=['pytest'],
       cmdclass={'test': PyTest},
       classifiers=[
-        "Programming Language :: Python",
-        "Programming Language :: Python :: 2.6",
-        "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 3.3",
-        "Topic :: Games/Entertainment :: Board Games",
-        "Intended Audience :: Developers",
-        "Development Status :: 3 - Alpha",
-        "License :: OSI Approved :: MIT License",
-        "Operating System :: OS Independent"])
+          "Programming Language :: Python",
+          "Programming Language :: Python :: 2.6",
+          "Programming Language :: Python :: 2.7",
+          "Programming Language :: Python :: 3.3",
+          "Topic :: Games/Entertainment :: Board Games",
+          "Intended Audience :: Developers",
+          "Development Status :: 3 - Alpha",
+          "License :: OSI Approved :: MIT License",
+          "Operating System :: OS Independent"])

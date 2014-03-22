@@ -8,36 +8,35 @@ This is a Python game engine implementation of the rather popular game [2048](ht
 ```python
 >>> from p2048 import Board
 >>> board = Board()
->>> print board
+>>> board
+<Board [[0, 0, 0, 0], [0, 0, 0, 0], [0, 2, 2, 0], [0, 0, 0, 0]]>
+>>> print '\n'.join(map(str, board.state))
 [0, 0, 0, 0]
 [0, 0, 0, 0]
 [0, 2, 2, 0]
 [0, 0, 0, 0]
 >>> board.move_left()
->>> print board
+>>> print '\n'.join(map(str, board.state))
 [0, 0, 0, 0]
 [0, 0, 0, 4]
 [4, 0, 0, 0]
 [0, 0, 0, 0]
 >>> board.move_right()
->>> print board
+>>> print '\n'.join(map(str, board.state))
 [0, 0, 0, 0]
 [0, 2, 0, 4]
 [0, 0, 0, 4]
 [0, 0, 0, 0]
 >>> board.move_down()
->>> print board
+>>> print '\n'.join(map(str, board.state))
 [0, 0, 0, 0]
 [2, 0, 0, 0]
 [0, 0, 0, 0]
 [0, 2, 0, 8]
 ```
 
-todos
+Features
 -----
- * adding new elements after each moves
- * counting moves
- * raising GameOverException once no more move is possible
- * change board dimension from 4 to n
- * tag version
- * add to PyPi with version and downloads badge(http://codeinthehole.com/writing/pypi-readme-badges/)
+ * adds new elements (2 or 4) after each move
+ * counts moves
+ * raises GameOverException once no more move is possible

@@ -128,8 +128,6 @@ class Board(object):
         self.state = self.deserialize(serialized)
 
 
-
-
 def move(row):
     without_zeroes = filter(bool, row)
     return right_pad(merge(without_zeroes))

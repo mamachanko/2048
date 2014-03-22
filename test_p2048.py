@@ -1,6 +1,6 @@
 from copy import deepcopy
-from itertools import permutations
 from functools import partial
+from itertools import permutations
 
 import pytest
 
@@ -199,6 +199,7 @@ def test_raises_gameover_exception_for_full_board():
                    [4, 2, 4, 2]])
     with pytest.raises(GameOverException):
         board.move_left()
+
 
 def test_does_not_raise_gameover_exception_for_unfinished_board():
     board = Board([[0, 0, 0, 0],

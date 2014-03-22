@@ -12,7 +12,8 @@ def board_move(move_func):
         board.move_count += 1
         board_state_before = board.serialize()
         return_value = move_func(*args, **kwargs)
-        if board.serialize() == board_state_before:
+        board_state_changed = board.serialize() != board_state_before
+        if 0 not in board.serialize() and not board_state_changed:
             raise GameOverException()
         board.add_random()
         return return_value

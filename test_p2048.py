@@ -192,18 +192,20 @@ def test_move_counting():
     assert 4 == board.move_count
 
 
-def test_raises_gameover_exception():
+def test_raises_gameover_exception_for_full_board():
     board = Board([[2, 4, 2, 4],
                    [4, 2, 4, 2],
                    [2, 4, 2, 4],
                    [4, 2, 4, 2]])
-    try:
+    with pytest.raises(GameOverException):
         board.move_left()
-    except GameOverException:
-        assert True
-    else:
-        assert False, 'GameOverException not raised'
 
+def test_does_not_raise_gameover_exception_for_unfinished_board():
+    board = Board([[0, 0, 0, 0],
+                   [4, 0, 0, 0],
+                   [2, 0, 0, 0],
+                   [2, 0, 0, 0]])
+    board.move_left()
 
 
 def get_positional_diff(list_a, list_b):

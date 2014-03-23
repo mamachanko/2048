@@ -10,25 +10,27 @@ This is a Python game engine implementation of the rather popular game [2048](ht
 >>> board = Board()
 >>> board
 <Board [[0, 0, 0, 0], [0, 0, 0, 0], [0, 2, 2, 0], [0, 0, 0, 0]]>
->>> print '\n'.join(map(str, board.state))
+>>> def pretty_board(board):
+        print '\n'.join(map(str, board.state))
+>>> pretty_board(board)
 [0, 0, 0, 0]
 [0, 0, 0, 0]
 [0, 2, 2, 0]
 [0, 0, 0, 0]
 >>> board.move_left()
->>> print '\n'.join(map(str, board.state))
+>>> pretty_board(board)
 [0, 0, 0, 0]
 [0, 0, 0, 4]
 [4, 0, 0, 0]
 [0, 0, 0, 0]
 >>> board.move_right()
->>> print '\n'.join(map(str, board.state))
+>>> pretty_board(board)
 [0, 0, 0, 0]
 [0, 2, 0, 4]
 [0, 0, 0, 4]
 [0, 0, 0, 0]
 >>> board.move_down()
->>> print '\n'.join(map(str, board.state))
+>>> pretty_board(board)
 [0, 0, 0, 0]
 [2, 0, 0, 0]
 [0, 0, 0, 0]

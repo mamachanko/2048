@@ -5,6 +5,9 @@
 
 This is a Python game engine implementation of the rather popular game [2048](http://gabrielecirulli.github.io/2048/).
 
+
+Usage
+-----
 ```python
 >>> from p2048 import Board
 >>> board = Board()

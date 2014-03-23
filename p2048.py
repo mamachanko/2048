@@ -73,6 +73,9 @@ class Board(object):
         self._move_left()
 
     def _move_left(self):
+        """
+        Performs the 'left' move on the board
+        """
         self.apply([partial(map, move)])
 
     @board_move
@@ -84,6 +87,9 @@ class Board(object):
         self._move_right()
 
     def _move_right(self):
+        """
+        Performs the 'right' move on the board
+        """
         self.apply([rotate, rotate, partial(map, move), rotate, rotate])
 
     @board_move
@@ -95,6 +101,9 @@ class Board(object):
         self._move_down()
 
     def _move_down(self):
+        """
+        Performs the 'down' move on the board
+        """
         self.apply([rotate, partial(map, move), rotate, rotate, rotate])
 
     @board_move
@@ -106,6 +115,9 @@ class Board(object):
         self._move_up()
 
     def _move_up(self):
+        """
+        Performs the 'up' move on the board
+        """
         self.apply([rotate, rotate, rotate, partial(map, move), rotate])
 
     def apply(self, functions):
@@ -121,6 +133,9 @@ class Board(object):
         return '<Board {}>'.format(self.state)
 
     def add_random(self):
+        """
+        Adds a random digit(either 2 or 4) to the board
+        """
         serialized = self.serialize()
         indexed = zip(range(len(serialized)), serialized)
         zeroes = filter(lambda x: not bool(x[1]), indexed)

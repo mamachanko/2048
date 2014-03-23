@@ -1,20 +1,20 @@
-from distutils.core import setup, Command
+from setuptools import setup, find_packages
+from setuptools.command.test import test as TestCommand
 import subprocess
+import sys
 
 
-class PyTest(Command):
-
-    user_options = []
-
-    def initialize_options(self):
-        pass
+class PyTest(TestCommand):
 
     def finalize_options(self):
-        pass
+        TestCommand.finalize_options(self)
+        self.test_args = []
+        self.test_suite = True
 
-    def run(self):
-        errno = subprocess.call(['py.test'])
-        raise SystemExit(errno)
+    def run_tests(self):
+        import pytest
+        errno = pytest.main(self.test_args)
+        sys.exit(errno)
 
 
 setup(name='python-2048a',
@@ -22,7 +22,7 @@ setup(name='python-2048a',
       author='Max Brauer',
       author_email='max@rootswiseyouths.com',
       url='http://github.com/mamachanko/2048',
-      packages=['p2048'],
+      packages=find_packages(),
       tests_require=['pytest'],
       cmdclass={'test': PyTest},
       classifiers=[

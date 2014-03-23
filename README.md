@@ -36,7 +36,12 @@ This is a Python game engine implementation of the rather popular game [2048](ht
 ```
 
 Features
------
+--------
  * adds new elements (2 or 4) after each move
  * counts moves
  * raises GameOverException once no more move is possible
+
+Todos
+-----
+ * fix coverage report via travis
+ * add score report

@@ -192,13 +192,24 @@ def test_move_counting():
     assert 4 == board.move_count
 
 
+def test_initial_score():
+    board = Board()
+    assert 4 == board.score
+
+
+def test_default_board_score(default_board_state):
+    board = Board(default_board_state)
+    assert 16 == board.score
+
+
 def test_raises_gameover_exception_for_full_board():
     board = Board([[2, 4, 2, 4],
                    [4, 2, 4, 2],
                    [2, 4, 2, 4],
                    [4, 2, 4, 2]])
-    with pytest.raises(GameOverException):
+    with pytest.raises(GameOverException) as exception_info:
         board.move_left()
+    assert board.score == exception_info.value.score
 
 
 def test_does_not_raise_gameover_exception_for_unfinished_board():

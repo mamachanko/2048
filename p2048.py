@@ -3,7 +3,9 @@ import random
 
 
 class GameOverException(Exception):
-    pass
+
+    def __init__(self, board):
+        self.score = board.score
 
 
 def board_move(move_func):
@@ -14,7 +16,7 @@ def board_move(move_func):
         return_value = move_func(*args, **kwargs)
         board_state_changed = board.serialize() != board_state_before
         if 0 not in board.serialize() and not board_state_changed:
-            raise GameOverException()
+            raise GameOverException(board)
         board.add_random()
         return return_value
     return wrapper
@@ -126,6 +128,13 @@ class Board(object):
         digit = random.choice((2, 4))
         serialized[index] = digit
         self.state = self.deserialize(serialized)
+
+    @property
+    def score(self):
+        """
+        Returns the Board's score
+        """
+        return sum(self.serialize())
 
 
 def move(row):
